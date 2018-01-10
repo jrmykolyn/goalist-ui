@@ -4,6 +4,8 @@
   "description": "Goalist UI is a GUI wrapper around the Goalist command line tool.",
   "main": "app/main.js",
   "scripts": {
+    "start": "electron .",
+    "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
