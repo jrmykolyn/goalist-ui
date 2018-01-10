@@ -2,7 +2,7 @@
   "name": "goalist-ui",
   "version": "0.0.0",
   "description": "Goalist UI is a GUI wrapper around the Goalist command line tool.",
-  "main": "index.js",
+  "main": "app/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
