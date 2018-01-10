@@ -5,6 +5,7 @@
   "main": "app/main.js",
   "scripts": {
     "start": "electron .",
+    "start:debug": "electron . --debug",
     "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
