@@ -18,5 +18,8 @@
   "homepage": "https://github.com/jrmykolyn/goalist-ui#readme",
   "dependencies": {
     "electron": "^1.7.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0"
   }
 }
