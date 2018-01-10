@@ -4,9 +4,11 @@
 // Node
 
 // Vendor
+const bourbon = require( 'bourbon' );
 const gulp = require( 'gulp' );
 const PathMap = require( 'sfco-path-map' );
 const sass = require( 'gulp-sass' );
+const sassUtils = require( 'sfco-sass-utils' );
 
 // --------------------------------------------------
 // DECLARE VARS
@@ -40,6 +42,10 @@ gulp.task( 'styles', function() {
 	gulp.src( `${PATHS.stylesSrc}/styles.scss` )
 		.pipe( sass( {
 			outputStyle: 'expanded',
+			includePaths: [
+				bourbon.includePaths,
+				sassUtils.includePaths,
+			],
 		} ) )
 		.pipe( gulp.dest( PATHS.stylesDest ) );
 } );
