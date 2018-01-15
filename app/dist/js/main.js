@@ -1,14 +1,11 @@
 // IMPORT MODULES
-const { ipcRenderer } = require( 'electron' );
+// Vendor
+import React from 'react' ;
+import ReactDOM from 'react-dom' ;
+
+// Project
+import App from '../components/App';
 
 window.addEventListener( 'DOMContentLoaded', () => {
-	// DECLARE VARS.
-	const btnElem = document.querySelector( '#btn' );
-
-	// REGISTER EVENTS
-	if ( btnElem ) {
-		btnElem.addEventListener( 'click', () => {
-			ipcRenderer.send( 'GET:LIST', 'Hello, world!' );
-		} );
-	}
+	ReactDOM.render( <App />, document.getElementById( 'root' ) );
 } );
