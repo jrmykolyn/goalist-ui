@@ -19,10 +19,12 @@ const PATHS = new PathMap( {
 	stylesSrc: '{{src}}/scss',
 	scriptsSrc: '{{src}}/js',
 	viewsSrc: '{{src}}/views',
+	componentsSrc: '{{src}}/components',
 	dist: '{{app}}/dist',
 	stylesDest: '{{dist}}/css',
 	scriptsDest: '{{dist}}/js',
 	viewsDest: '{{dist}}/views',
+	componentsDest: '{{dist}}/components',
 } );
 
 // --------------------------------------------------
@@ -31,7 +33,7 @@ const PATHS = new PathMap( {
 /**
  * Wrapper around any/all tasks to be executed when `gulp` is run.
  */
-gulp.task( 'default', [ 'styles', 'scripts', 'views' ], function() {
+gulp.task( 'default', [ 'styles', 'scripts', 'views', 'components' ], function() {
 	return;
 } );
 
@@ -39,7 +41,7 @@ gulp.task( 'default', [ 'styles', 'scripts', 'views' ], function() {
  * Wrapper around any/all style-related tasks.
  */
 gulp.task( 'styles', function() {
-	gulp.src( `${PATHS.stylesSrc}/styles.scss` )
+	return gulp.src( `${PATHS.stylesSrc}/styles.scss` )
 		.pipe( sass( {
 			outputStyle: 'expanded',
 			includePaths: [
@@ -54,7 +56,7 @@ gulp.task( 'styles', function() {
  * Wrapper around any/all script-related tasks.
  */
 gulp.task( 'scripts', function() {
-	gulp.src( `${PATHS.scriptsSrc}/*.js` )
+	return gulp.src( `${PATHS.scriptsSrc}/*.js` )
 		.pipe( gulp.dest( PATHS.scriptsDest ) );
 } );
 
@@ -62,13 +64,22 @@ gulp.task( 'scripts', function() {
  * Wrapper around any/all script-related tasks.
  */
 gulp.task( 'views', function() {
-	gulp.src( `${PATHS.viewsSrc}/*.html` )
+	return gulp.src( `${PATHS.viewsSrc}/*.html` )
 		.pipe( gulp.dest( PATHS.viewsDest ) );
+} );
+
+/**
+ * Wrapper around any/all component-related tasks.
+ */
+gulp.task( 'components', function() {
+	return gulp.src( `${PATHS.componentsSrc}/*.jsx` )
+		.pipe( gulp.dest( PATHS.componentsDest ) );
 } );
 
 /**
  * ...
  */
 gulp.watch( `${PATHS.stylesSrc}/**/*.scss`, [ 'styles' ] );
-gulp.watch( `${PATHS.scriptsSrc}/**/*.scss`, [ 'scripts' ] );
+gulp.watch( `${PATHS.scriptsSrc}/**/*.js`, [ 'scripts' ] );
 gulp.watch( `${PATHS.viewsSrc}/**/*.html`, [ 'views' ] );
+gulp.watch( `${PATHS.components}/**/*.js`, [ 'components' ] );
