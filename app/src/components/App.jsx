@@ -4,30 +4,27 @@ const React = require( 'react' );
 
 // Project
 import Header from './Header';
+import Main from './Main';
 
 export default class App extends React.Component {
 	constructor( props  ) {
 		super( props );
 
 		this.state = {
-			view: 'new',
+			activeView: 'new',
 		};
 	}
 
 	render() {
 		return (
 			<div>
-				<Header
-					showView={this.showView.bind( this )}
-				/>
-				<section>
-					<h1>{this.state.view}</h1>
-				</section>
+				<Header showView={this.showView.bind( this )} />
+				<Main activeView={this.state.activeView } />
 			</div>
 		);
 	}
 
 	showView( view ) {
-		this.setState( { view } );
+		this.setState( { activeView: view } );
 	}
 }
