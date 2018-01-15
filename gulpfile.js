@@ -77,9 +77,11 @@ gulp.task( 'components', function() {
 } );
 
 /**
- * ...
+ * Wrapper arround any/all 'watch' tasks.
  */
-gulp.watch( `${PATHS.stylesSrc}/**/*.scss`, [ 'styles' ] );
-gulp.watch( `${PATHS.scriptsSrc}/**/*.js`, [ 'scripts' ] );
-gulp.watch( `${PATHS.viewsSrc}/**/*.html`, [ 'views' ] );
-gulp.watch( `${PATHS.componentsSrc}/**/*.jsx`, [ 'components' ] );
+gulp.task( 'watch', [ 'default' ], function() {
+	gulp.watch( `${PATHS.stylesSrc}/**/*.scss`, [ 'styles' ] );
+	gulp.watch( `${PATHS.scriptsSrc}/**/*.js`, [ 'scripts' ] );
+	gulp.watch( `${PATHS.viewsSrc}/**/*.html`, [ 'views' ] );
+	gulp.watch( `${PATHS.componentsSrc}/**/*.jsx`, [ 'components' ] );
+} );
