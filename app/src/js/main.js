@@ -8,7 +8,7 @@ window.addEventListener( 'DOMContentLoaded', () => {
 	// REGISTER EVENTS
 	if ( btnElem ) {
 		btnElem.addEventListener( 'click', () => {
-			ipcRenderer.send( 'CLIENT:MSG', 'Hello, world!' );
+			ipcRenderer.send( 'GET:LIST', 'Hello, world!' );
 		} );
 	}
 } );

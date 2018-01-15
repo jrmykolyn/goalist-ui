@@ -1,3 +1,6 @@
+@import 'bourbon';
+@import 'sfco-sass-utils';
+
 html,
 body {
     margin: 0;
@@ -17,4 +20,16 @@ body {
 main {
     width: 94%;
     margin: 0 auto;
+}
+
+header {
+	@include dims( 100% auto );
+}
+
+nav {
+
+}
+
+a {
+
 }
