@@ -2,16 +2,20 @@
 // Vendor
 const React = require( 'react' );
 
-export default class Nav extends React.Component {
+export default class Header extends React.Component {
 	render() {
 		return (
 			<header>
 				<nav>
-					<a href="#">New</a>
-					<a href="#">Active</a>
-					<a href="#">Archive</a>
+					<a href="#" onClick={this.handleShowView.bind( this )}>New</a>
+					<a href="#" onClick={this.handleShowView.bind( this )}>Active</a>
+					<a href="#" onClick={this.handleShowView.bind( this )}>Archive</a>
 				</nav>
 			</header>
 		);
+	}
+
+	handleShowView( e ) {
+		this.props.showView( e.target.innerHTML.toLowerCase() );
 	}
 }
