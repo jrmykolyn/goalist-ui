@@ -82,4 +82,4 @@ gulp.task( 'components', function() {
 gulp.watch( `${PATHS.stylesSrc}/**/*.scss`, [ 'styles' ] );
 gulp.watch( `${PATHS.scriptsSrc}/**/*.js`, [ 'scripts' ] );
 gulp.watch( `${PATHS.viewsSrc}/**/*.html`, [ 'views' ] );
-gulp.watch( `${PATHS.components}/**/*.js`, [ 'components' ] );
+gulp.watch( `${PATHS.componentsSrc}/**/*.jsx`, [ 'components' ] );
