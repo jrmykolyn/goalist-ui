@@ -9,17 +9,28 @@ html {
 }
 
 body {
+  color: #222;
   background: #fafafa;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1.6rem;
 }
 
 main {
-  width: 94%;
+  width: 100%;
   margin: 0 auto;
 }
 
 header {
   width: 100%;
   height: auto;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.05);
 }
