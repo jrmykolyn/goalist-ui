@@ -8,11 +8,15 @@ const bourbon = require( 'bourbon' );
 const gulp = require( 'gulp' );
 const PathMap = require( 'sfco-path-map' );
 const sass = require( 'gulp-sass' );
+const sassLint = require( 'gulp-sass-lint' );
 const sassUtils = require( 'sfco-sass-utils' );
+const sjmConfigs = require( '@sjmdev/sjm-configs' );
 
 // --------------------------------------------------
 // DECLARE VARS
 // --------------------------------------------------
+const { sassLintConfig } = sjmConfigs;
+
 const PATHS = new PathMap( {
 	app: `${__dirname}/app`,
 	src: '{{app}}/src',
@@ -42,6 +46,9 @@ gulp.task( 'default', [ 'styles', 'scripts', 'views', 'components' ], function()
  */
 gulp.task( 'styles', function() {
 	return gulp.src( `${PATHS.stylesSrc}/styles.scss` )
+		.pipe( sassLint( sassLintConfig ) )
+		.pipe( sassLint.format() )
+		.pipe( sassLint.failOnError() )
 		.pipe( sass( {
 			outputStyle: 'expanded',
 			includePaths: [
