@@ -23,7 +23,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
-    "electron": "^1.7.10",
+    "electron": "^1.8.1",
     "goalist": "^0.13.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
