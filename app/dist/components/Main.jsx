@@ -7,7 +7,10 @@ import List from './List';
 
 export default class Main extends React.Component {
 	render() {
-		let content = ( this.props.activeView === 'active' ) ? <List activeGoals={this.props.activeGoals} /> : this.props.activeView;
+		let { activeView, goals } = this.props;
+		let displayGoals = goals[ activeView ];
+
+		let content = ( displayGoals ) ? <List goals={displayGoals} /> : this.props.activeView;
 
 		return (
 			<main>

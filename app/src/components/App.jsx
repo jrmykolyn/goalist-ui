@@ -7,14 +7,16 @@ const Goalist = require( 'goalist' );
 import Header from './Header';
 import Main from './Main';
 
+// DECLARE VARS
+let goalist = new Goalist();
+
 export default class App extends React.Component {
 	constructor( props  ) {
 		super( props );
 
 		this.state = {
 			activeView: 'new',
-			activeGoals: null,
-			archivedGoals: null,
+			goals: {},
 		};
 	}
 
@@ -22,29 +24,42 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<Header showView={this.showView.bind( this )} />
-				<Main activeView={this.state.activeView } activeGoals={this.state.activeGoals} archivedGoals={this.state.archivedGoals}/>
+				<Main activeView={this.state.activeView } goals={this.state.goals} />
 			</div>
 		);
 	}
 
 	componentWillUpdate( nextProps, nextState ) {
-		if (
-			nextState
-			&& nextState.activeView
-			&& nextState.activeView === 'active'
-			&& !nextState.activeGoals
-		) {
-			console.log( 'Fetching "active" goal data.' ); /// TEMP
+		if ( nextState && nextState.activeView ) {
+			if (
+				nextState.activeView === 'active'
+				&& !nextState.goals.active
+			) {
+				console.log( 'Fetching "active" goal data.' ); /// TEMP
 
-			let instance = new Goalist();
+				goalist.run( 'list' )
+					.then( ( data ) => {
+						this.setState( { goals: { active: data.goals } } );
+					} )
+					.catch( ( err ) => {
+						console.log( err.message );
+					} );
+			}
 
-			instance.run( 'list' )
-				.then( ( data ) => {
-					this.setState( { activeGoals: data.goals } );
-				} )
-				.catch( ( err ) => {
-					console.log( err.message );
-				} );
+			if (
+				nextState.activeView === 'archive'
+				&& !nextState.goals.archive
+			) {
+				console.log( 'Fetching "archive" goal data.' ); /// TEMP
+
+				goalist.run( 'list', [], { archive: true } )
+					.then( ( data ) => {
+						this.setState( { goals: { archive: data.goals } } );
+					} )
+					.catch( ( err ) => {
+						console.log( err.message );
+					} );
+			}
 		}
 	}
 

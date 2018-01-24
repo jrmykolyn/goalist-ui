@@ -7,7 +7,7 @@ import ListItem from './ListItem';
 
 export default class List extends React.Component {
 	render() {
-		let content = this.props.activeGoals ? Object.keys( this.props.activeGoals ).map( ( k ) => { return <ListItem key={ k } goal={this.props.activeGoals[ k ] } /> } ) : <li>Coming soon!</li>;
+		let content = this.props.goals ? Object.keys( this.props.goals ).map( ( k ) => { return <ListItem key={ k } goal={this.props.goals[ k ] } /> } ) : <li>Coming soon!</li>;
 
 		return (
 			<ul>
