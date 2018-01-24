@@ -3,6 +3,7 @@
 const React = require( 'react' );
 
 // Project
+import Form from './Form';
 import List from './List';
 
 export default class Main extends React.Component {
@@ -10,7 +11,7 @@ export default class Main extends React.Component {
 		let { activeView, goals } = this.props;
 		let displayGoals = goals[ activeView ];
 
-		let content = ( displayGoals ) ? <List goals={displayGoals} /> : this.props.activeView;
+		let content = ( displayGoals ) ? <List goals={displayGoals} /> : <Form newGoal={this.props.newGoal} createGoal={this.props.createGoal}/>;
 
 		return (
 			<main>

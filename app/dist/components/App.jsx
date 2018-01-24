@@ -17,6 +17,7 @@ export default class App extends React.Component {
 		this.state = {
 			activeView: 'new',
 			goals: {},
+			newGoal: {},
 		};
 	}
 
@@ -24,7 +25,7 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<Header showView={this.showView.bind( this )} />
-				<Main activeView={this.state.activeView } goals={this.state.goals} />
+				<Main activeView={this.state.activeView } goals={this.state.goals} newGoal={this.state.newGoal} createGoal={this.createGoal.bind( this )}/>
 			</div>
 		);
 	}
@@ -65,5 +66,22 @@ export default class App extends React.Component {
 
 	showView( view ) {
 		this.setState( { activeView: view } );
+	}
+
+	createGoal( goal ) {
+		if ( goal && goal.title ) {
+			goalist.run( 'add', [ goal.title ] )
+				.then( ( data ) => {
+					// Update view, clear `newGoal`, and force fetch of 'active' goal data.
+					this.setState( {
+						activeView: 'active',
+						newGoal: {},
+						goals: { active: null },
+					} );
+				} )
+				.catch( ( err ) => {
+					console.log( err.message );
+				} );
+		}
 	}
 }
