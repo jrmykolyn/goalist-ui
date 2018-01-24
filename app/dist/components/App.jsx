@@ -25,7 +25,7 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<Header showView={this.showView.bind( this )} />
-				<Main activeView={this.state.activeView } goals={this.state.goals} newGoal={this.state.newGoal} createGoal={this.createGoal.bind( this )}/>
+				<Main activeView={this.state.activeView } goals={this.state.goals} newGoal={this.state.newGoal} createGoal={this.createGoal.bind( this )} removeGoal={this.removeGoal.bind( this )}/>
 			</div>
 		);
 	}
@@ -68,6 +68,9 @@ export default class App extends React.Component {
 		this.setState( { activeView: view } );
 	}
 
+	/**
+	 * Given an object of 'goal' data, add it.
+	 */
 	createGoal( goal ) {
 		if ( goal && goal.title ) {
 			goalist.run( 'add', [ goal.title ] )
@@ -77,6 +80,23 @@ export default class App extends React.Component {
 						activeView: 'active',
 						newGoal: {},
 						goals: { active: null },
+					} );
+				} )
+				.catch( ( err ) => {
+					console.log( err.message );
+				} );
+		}
+	}
+
+	/**
+	 * Given a 'goal' object, remove it.
+	 */
+	removeGoal( goal ) {
+		if ( goal && goal.id ) {
+			goalist.run( 'remove', [ goal.id ] )
+				.then( ( data ) => {
+					this.setState( {
+						goals: { active: null }, /// TEMP
 					} );
 				} )
 				.catch( ( err ) => {
