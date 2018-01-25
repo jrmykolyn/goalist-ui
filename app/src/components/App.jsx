@@ -25,7 +25,14 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<Header showView={this.showView.bind( this )} />
-				<Main activeView={this.state.activeView } goals={this.state.goals} newGoal={this.state.newGoal} createGoal={this.createGoal.bind( this )} removeGoal={this.removeGoal.bind( this )}/>
+				<Main
+					activeView={this.state.activeView }
+					goals={this.state.goals}
+					newGoal={this.state.newGoal}
+					createGoal={this.createGoal.bind( this )}
+					removeGoal={this.removeGoal.bind( this )}
+					toggleGoal={this.toggleGoal.bind( this )}
+				/>
 			</div>
 		);
 	}
@@ -79,7 +86,9 @@ export default class App extends React.Component {
 					this.setState( {
 						activeView: 'active',
 						newGoal: {},
-						goals: { active: null },
+						goals: {
+							active: null,
+						},
 					} );
 				} )
 				.catch( ( err ) => {
@@ -95,8 +104,34 @@ export default class App extends React.Component {
 		if ( goal && goal.id ) {
 			goalist.run( 'remove', [ goal.id ] )
 				.then( ( data ) => {
+					/// TEMP: Force re-fetch of both 'active' and 'archived' goal data.
 					this.setState( {
-						goals: { active: null }, /// TEMP
+						goals: {
+							active: null,
+							archive: null,
+						},
+					} );
+				} )
+				.catch( ( err ) => {
+					console.log( err.message );
+				} );
+		}
+	}
+
+	/**
+	 * Given a 'goal' object, toggle its 'active' property.
+	 */
+	toggleGoal( goal ) {
+		if ( goal && goal.id ) {
+			// If the goal is active, archive it. If it's already archived, activate it.
+			goalist.run( 'archive', [ goal.id ], { active: !goal.active } )
+				.then( ( data ) => {
+					/// TEMP: Force re-fetch of both 'active' and 'archived' goal data.
+					this.setState( {
+						goals: {
+							active: null,
+							archive: null,
+						},
 					} );
 				} )
 				.catch( ( err ) => {
