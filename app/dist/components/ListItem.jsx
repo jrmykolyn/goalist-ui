@@ -11,6 +11,7 @@ export default class ListItem extends React.Component {
 				<span>{ this.props.goal.description }</span><br />
 				<span>{ this.props.goal.complete }</span><br />
 				<span>{ this.props.goal.active }</span>
+				<button onClick={this.handleToggleGoal.bind( this ) }>{ this.props.goal.active ? 'Archive' : 'Activate' }</button>
 				<button onClick={this.handleRemoveGoal.bind( this ) }>Delete</button>
 			</li>
 		);
@@ -20,5 +21,11 @@ export default class ListItem extends React.Component {
 		e.preventDefault();
 
 		this.props.removeGoal( this.props.goal );
+	}
+
+	handleToggleGoal( e ) {
+		e.preventDefault();
+
+		this.props.toggleGoal( this.props.goal );
 	}
 }

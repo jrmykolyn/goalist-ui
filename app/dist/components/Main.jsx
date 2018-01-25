@@ -11,7 +11,7 @@ export default class Main extends React.Component {
 		let { activeView, goals } = this.props;
 		let displayGoals = goals[ activeView ];
 
-		let content = ( displayGoals ) ? <List goals={displayGoals} removeGoal={this.props.removeGoal} /> : <Form newGoal={this.props.newGoal} createGoal={this.props.createGoal}/>;
+		let content = ( displayGoals ) ? <List goals={displayGoals} removeGoal={this.props.removeGoal} toggleGoal={this.props.toggleGoal}/> : <Form newGoal={this.props.newGoal} createGoal={this.props.createGoal}/>;
 
 		return (
 			<main>
