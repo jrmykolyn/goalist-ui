@@ -11,7 +11,7 @@ export default class ListItem extends React.Component {
 				<span>{ this.props.goal.description }</span><br />
 				<span>{ this.props.goal.complete }</span><br />
 				<span>{ this.props.goal.active }</span>
-				<button onClick={this.handleToggleGoal.bind( this ) }>Toggle</button>
+				<button onClick={this.handleToggleGoal.bind( this ) }>{ this.props.goal.active ? 'Archive' : 'Activate' }</button>
 				<button onClick={this.handleRemoveGoal.bind( this ) }>Delete</button>
 			</li>
 		);
